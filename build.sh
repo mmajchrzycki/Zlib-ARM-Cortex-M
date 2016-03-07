@@ -22,7 +22,7 @@ for s in $sources; do
 
 	echo "Building $s => $o"
 	arm-none-eabi-gcc -Wall -Wno-switch -nostdlib -nodefaultlibs -fno-exceptions \
-		-g -Os -mthumb -mcpu=$mcu -Wno-attributes \
+		-g -Os -mthumb -mcpu=$mcu -Wno-attributes -mfloat-abi=hard -mfpu=fpv4-sp-d16\
 		--function-sections \
 		-I . \
 		-o $o -x c -c $s
