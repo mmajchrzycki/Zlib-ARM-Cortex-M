@@ -1,10 +1,5 @@
 #!/bin/bash
 
-if [ -f "toolpath" ]; then
-	toolPath=$(cat toolpath)
-	PATH="$toolPath:$PATH"
-fi
-
 mcu="cortex-m4"	# "cortex-m0"
 arch="armv7-m"	# "armv6-m" for Cortex-M0/+
 
@@ -44,17 +39,12 @@ if [ $? -ne 0 ]; then
 fi
 
 echo Archiving...
-arm-none-eabi-ar r obj/zlib.$arch.a obj/zlib.$arch.o
+arm-none-eabi-ar r obj/libz.a obj/zlib.$arch.o
 
 if [ $? -ne 0 ]; then
 	echo "Archiving failed."
 	exit -1
 fi
-
-# report symbols
-arm-none-eabi-size obj/zlib.$arch.a > obj/zlib.$arch.report.txt
-arm-none-eabi-nm obj/zlib.$arch.a >> obj/zlib.$arch.report.txt
-arm-none-eabi-objdump -d obj/zlib.armv7-m.o >> obj/zlib.$arch.report.txt
 
 echo "Build succeeded."
 
