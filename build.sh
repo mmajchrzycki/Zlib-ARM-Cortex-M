@@ -5,7 +5,7 @@ if [ -f "toolpath" ]; then
 	PATH="$toolPath:$PATH"
 fi
 
-mcu="cortex-m3"	# "cortex-m0"
+mcu="cortex-m4"	# "cortex-m0"
 arch="armv7-m"	# "armv6-m" for Cortex-M0/+
 
 sources=`ls *.c`
@@ -22,7 +22,7 @@ for s in $sources; do
 
 	echo "Building $s => $o"
 	arm-none-eabi-gcc -Wall -Wno-switch -nostdlib -nodefaultlibs -fno-exceptions \
-		-g -Os -mthumb -march=$arch -mcpu=$mcu -Wno-attributes \
+		-g -Os -mthumb -mcpu=$mcu -Wno-attributes \
 		--function-sections \
 		-I . \
 		-o $o -x c -c $s
